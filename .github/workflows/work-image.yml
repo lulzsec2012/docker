@@ -25,8 +25,8 @@ jobs:
       - name: Build the latest Docker image
         run: |
           docker build . --file work.Dockerfile --tag work-dev
-          docker image tag work-dev mattlu/work-dev:latest
-          docker image tag work-dev mattlu/work-dev:22.04
-          docker image tag work-dev mattlu/work-dev:22.04-${{ steps.commit.outputs.short }}
+          docker image tag work-dev rocklu/work-dev:latest
+          docker image tag work-dev rocklu/work-dev:22.04
+          docker image tag work-dev rocklu/work-dev:22.04-${{ steps.commit.outputs.short }}
       - name: Push the latest Docker image
-        run: docker push --all-tags mattlu/work-dev
+        run: docker push --all-tags rocklu/work-dev

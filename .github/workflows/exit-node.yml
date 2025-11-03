@@ -23,7 +23,7 @@ jobs:
      - name: Build the latest Docker image
        run: |
          docker build . --file exit-node.Dockerfile --tag exit-node
-         docker image tag exit-node mattlu/exit-node:latest
+         docker image tag exit-node rocklu/exit-node:latest
 
      - name: Push the latest Docker image
-       run: docker push --all-tags mattlu/exit-node
+       run: docker push --all-tags rocklu/exit-node

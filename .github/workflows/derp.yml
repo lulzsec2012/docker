@@ -24,7 +24,7 @@ jobs:
      - name: Build the latest Docker image
        run: |
          docker build . --file derp.Dockerfile --tag derp
-         docker image tag derp mattlu/derp:latest
+         docker image tag derp rocklu/derp:latest
 
      - name: Push the latest Docker image
-       run: docker push --all-tags mattlu/derp
+       run: docker push --all-tags rocklu/derp

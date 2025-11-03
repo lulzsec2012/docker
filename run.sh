@@ -38,7 +38,7 @@ function work-linux-server() {
         "${volumes[@]}" \
         --env-file "$base/home-work/.ssh/vpn.cfg" \
         --restart=always --detach \
-        mattlu/work-dev:latest
+        rocklu/work-dev:latest
 
 }
 
@@ -92,7 +92,7 @@ function work-linux-cuda-server() {
         "${volumes[@]}" \
         --env-file "$base/home-work/.ssh/vpn.cfg" \
         --restart=always --detach \
-        mattlu/work-cuda-dev:cuda13.0-ubuntu22.04
+        rocklu/work-cuda-dev:cuda13.0-ubuntu22.04
 
 }
 

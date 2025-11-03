@@ -20,7 +20,7 @@ jobs:
      - name: Build the latest Docker image
        run: |
          docker build . --file test.Dockerfile --tag test
-         docker image tag test mattlu/test:latest
+         docker image tag test rocklu/test:latest
 
      - name: Push the latest Docker image
-       run: docker push --all-tags mattlu/test
+       run: docker push --all-tags rocklu/test

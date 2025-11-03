@@ -20,6 +20,6 @@ jobs:
      - name: Login to DockerHub Registry
        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
      - name: Build the latest Docker image
-       run: docker build . --file explore.Dockerfile --tag mattlu/explore-dev:latest
+       run: docker build . --file explore.Dockerfile --tag rocklu/explore-dev:latest
      - name: Push the latest Docker image
-       run: docker push mattlu/explore-dev:latest
+       run: docker push rocklu/explore-dev:latest
