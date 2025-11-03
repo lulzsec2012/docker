@@ -14,12 +14,14 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - id: commit
         uses: pr-mpt/actions-commit-hash@v2
       - uses: actions/checkout@v1
+      - name: Setup disk monitoring
+        run: df -h
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Build the latest Docker image
