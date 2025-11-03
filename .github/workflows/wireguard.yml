@@ -23,7 +23,7 @@ jobs:
      - name: Build the latest Wireguard image
        run: |
          docker build . --file wireguard.Dockerfile --tag wireguard
-         docker image tag wireguard rocklu/wireguard:latest
+         docker image tag wireguard ${{ secrets.DOCKERHUB_USERNAME }}/wireguard:latest
 
      - name: Push the latest Wireguard image
-       run: docker push --all-tags rocklu/wireguard
+       run: docker push --all-tags ${{ secrets.DOCKERHUB_USERNAME }}/wireguard

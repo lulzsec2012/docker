@@ -23,7 +23,7 @@ jobs:
      - name: Build the latest Docker image
        run: |
          docker build . --file socks-node.Dockerfile --tag socks-node
-         docker image tag socks-node rocklu/socks-node:latest
+         docker image tag socks-node ${{ secrets.DOCKERHUB_USERNAME }}/socks-node:latest
 
      - name: Push the latest Docker image
-       run: docker push --all-tags rocklu/socks-node
+       run: docker push --all-tags ${{ secrets.DOCKERHUB_USERNAME }}/socks-node

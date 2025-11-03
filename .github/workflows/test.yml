@@ -20,7 +20,7 @@ jobs:
      - name: Build the latest Docker image
        run: |
          docker build . --file test.Dockerfile --tag test
-         docker image tag test rocklu/test:latest
+         docker image tag test ${{ secrets.DOCKERHUB_USERNAME }}/test:latest
 
      - name: Push the latest Docker image
-       run: docker push --all-tags rocklu/test
+       run: docker push --all-tags ${{ secrets.DOCKERHUB_USERNAME }}/test
