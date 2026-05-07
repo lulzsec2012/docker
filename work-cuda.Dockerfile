@@ -1,5 +1,5 @@
-ARG UBUNTU_VERSION=22.04
-ARG UBUNTU_NAME=jammy
+ARG UBUNTU_VERSION=24.04
+ARG UBUNTU_NAME=noble
 ARG DEBIAN_FRONTEND="noninteractive"
 
 # ********************************************************************************
@@ -283,7 +283,7 @@ RUN cd /opt/ && \
 # stage 1
 # ********************************************************************************
 
-FROM nvidia/cuda:12.4.1-devel-ubuntu${UBUNTU_VERSION} AS builder1
+FROM nvidia/cuda:13.2.1-devel-ubuntu${UBUNTU_VERSION} AS builder1
 ARG UBUNTU_NAME
 ARG DEBIAN_FRONTEND
 
@@ -394,6 +394,17 @@ RUN apt-get update && ldconfig && \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# ================================================================================
+# 网络维护工具安装
+RUN apt-get update && apt-get install -y \
+    vim zstd \
+    net-tools traceroute mtr dnsutils tcpdump \
+    iftop nload nethogs nmap iperf3 vnstat \
+    autossh fzf \
+    && echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y wireshark \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Clang
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
