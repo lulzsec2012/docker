@@ -17,9 +17,10 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - id: commit
-        uses: pr-mpt/actions-commit-hash@v2
       - uses: actions/checkout@v1
+      - name: Get short commit hash
+        id: commit
+        run: echo "short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
       - name: Setup disk monitoring
         run: df -h
       - name: Login to DockerHub Registry
