@@ -30,7 +30,7 @@ RUN apt-get update && \
     texinfo \
     libxpm-dev \
     libgnutls28-dev \
-    libncurses5-dev \
+    libncurses-dev \
     libxml2-dev \
     libxt-dev \
     gcc-multilib \
@@ -252,7 +252,7 @@ RUN curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/downl
 RUN apt-get update && \
     apt-get install -y \
     automake \
-    pkg-config protobuf-compiler libprotobuf-dev libutempter-dev zlib1g-dev libncurses5-dev \
+    pkg-config protobuf-compiler libprotobuf-dev libutempter-dev zlib1g-dev libncurses-dev \
     libssl-dev bash-completion tmux less && \
     # https://github.com/mobile-shell/mosh/issues/1134
     git clone --branch=mosh-1.4.0+blink-17.3.0 https://github.com/blinksh/mosh-server && \
@@ -301,10 +301,10 @@ RUN apt-get update && \
     libgmp10 \
     coreutils \
     libjpeg-turbo8 \
-    libtiff5 \
+    libtiff6 \
     libxpm4 \
     libgnutlsxx28 \
-    libncurses5 \
+    libncurses6 \
     libxml2 \
     libxt6 \
     libx11-xcb1 \
@@ -369,8 +369,8 @@ RUN apt-get update && ldconfig && \
     virtualenv \
     tzdata \
     # tablegen
-    libncurses5-dev \
-    libncurses5 \
+    libncurses-dev \
+    libncurses6 \
     # riscv-isa-sim
     device-tree-compiler libboost-regex-dev libboost-system-dev \
     # tools
