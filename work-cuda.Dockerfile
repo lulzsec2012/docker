@@ -472,7 +472,7 @@ RUN TZ=Asia/Shanghai \
     && echo $TZ > /etc/timezone \
     && dpkg-reconfigure -f noninteractive tzdata && \
     # packages for vpn
-    pip3 install --no-cache-dir requests pyyaml
+    pip3 install --break-system-packages --no-cache-dir requests pyyaml
 
 
 # ================================================================================
