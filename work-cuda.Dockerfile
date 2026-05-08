@@ -356,7 +356,7 @@ RUN apt-get update && ldconfig && \
     libutempter-dev \
     # ping network
     iputils-ping \
-    netcat \
+    netcat-openbsd \
     # SQL
     sqlite3 postgresql-client \
     # smb
