@@ -303,7 +303,6 @@ RUN apt-get update && \
     libjpeg-turbo8 \
     libtiff6 \
     libxpm4 \
-    libgnutlsxx28 \
     libncurses6 \
     libxml2 \
     libxt6 \
