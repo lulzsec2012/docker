@@ -1,7 +1,7 @@
 # ENV DERP_DOMAIN your-hostname.com
 
 FROM golang:alpine AS builder
-ARG TAILSCALE_VERSION=v1.88.4
+ARG TAILSCALE_VERSION=v1.98.1
 
 RUN apk add --no-cache git
 RUN git clone --branch ${TAILSCALE_VERSION} --depth 1 https://github.com/tailscale/tailscale.git /tailscale
