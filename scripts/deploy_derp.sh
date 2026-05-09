@@ -27,7 +27,7 @@ echo "=== Starting new DERP relay ==="
 docker run -d --name derper \
   --restart always \
   --network host \
-  -e TS_AUTH_KEY="${TS_AUTH_KEY}" \
+  -e TAILSCALE_AUTH_KEY="${TS_AUTH_KEY}" \
   -e DERP_DOMAIN="${DERP_DOMAIN}" \
   -e DERP_HOST="${DERP_HOST}" \
   -e DERP_ADDR="0.0.0.0:443" \
