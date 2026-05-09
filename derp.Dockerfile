@@ -3,9 +3,15 @@
 FROM golang:alpine AS builder
 ARG TAILSCALE_VERSION=v1.88.4
 
-RUN go install tailscale.com/cmd/derper@${TAILSCALE_VERSION}
-RUN go install tailscale.com/cmd/tailscaled@${TAILSCALE_VERSION}
-RUN go install tailscale.com/cmd/tailscale@${TAILSCALE_VERSION}
+RUN apk add --no-cache git
+RUN git clone --branch ${TAILSCALE_VERSION} --depth 1 https://github.com/tailscale/tailscale.git /tailscale
+WORKDIR /tailscale
+
+RUN sed -i 's/"udp",/"udp4",/' net/stunserver/stunserver.go
+
+RUN go install ./cmd/derper
+RUN go install ./cmd/tailscaled
+RUN go install ./cmd/tailscale
 
 # FROM alpine
 FROM alpine
@@ -14,7 +20,7 @@ WORKDIR /app
 # ========= CONFIG =========
 # - derper args
 ENV DERP_DOMAIN your-hostname.com
-ENV DERP_ADDR :443
+ENV DERP_ADDR 0.0.0.0:443
 ENV DERP_HTTP_PORT 80
 ENV DERP_HOST=127.0.0.1
 ENV DERP_CERTS=/app/certs
