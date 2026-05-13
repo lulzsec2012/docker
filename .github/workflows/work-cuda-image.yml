@@ -27,7 +27,7 @@ jobs:
         run: |
           DOCKER_BUILDKIT=0 docker build . --file work-cuda.Dockerfile --tag work-cuda-dev
           docker image tag work-cuda-dev ${{ secrets.DOCKERHUB_USERNAME }}/work-cuda-dev:latest
-          docker image tag work-cuda-dev ${{ secrets.DOCKERHUB_USERNAME }}/work-cuda-dev:cuda13.2-ubuntu24.04
-          docker image tag work-cuda-dev ${{ secrets.DOCKERHUB_USERNAME }}/work-cuda-dev:cuda13.2-ubuntu24.04-${{ steps.commit.outputs.short }}
+          docker image tag work-cuda-dev ${{ secrets.DOCKERHUB_USERNAME }}/work-cuda-dev:cuda13.0-ubuntu24.04
+          docker image tag work-cuda-dev ${{ secrets.DOCKERHUB_USERNAME }}/work-cuda-dev:cuda13.0-ubuntu24.04-${{ steps.commit.outputs.short }}
       - name: Push the latest Docker image
         run: docker push --all-tags ${{ secrets.DOCKERHUB_USERNAME }}/work-cuda-dev

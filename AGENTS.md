@@ -9,7 +9,7 @@
 | Dockerfile | 基础镜像 | 用途 | 推送到 DockerHub |
 |---|---|---|---|---|
 | `work.Dockerfile` | Ubuntu 22.04 | 主开发环境 (Emacs + dev tools) | `lulzsec2012/work-dev` |
-| `work-cuda.Dockerfile` | nvidia/cuda:13.2.1-devel-ubuntu24.04 | GPU 开发环境 (含网络工具) | `lulzsec2012/work-cuda-dev` |
+| `work-cuda.Dockerfile` | nvidia/cuda:13.0.2-devel-ubuntu24.04 | GPU 开发环境 (含网络工具) | `lulzsec2012/work-cuda-dev` |
 | `explore.Dockerfile` | Ubuntu 22.04 | 旧版探索环境 (Emacs 29) | `lulzsec2012/explore-dev` |
 | `derp.Dockerfile` | golang:alpine → alpine | Tailscale DERP 中继 | `lulzsec2012/derp` |
 | `exit-node.Dockerfile` | tailscale/tailscale:stable | Tailscale 出口节点 | `lulzsec2012/exit-node` |
@@ -82,7 +82,7 @@ APT::Install-Recommends "false";
 
 ## 架构约束
 
-- **work-cuda.Dockerfile: 基于 `nvidia/cuda:13.2.1-devel-ubuntu24.04`，clang-18 + clang-format/clang-tidy/lldb/clangd 为 clang-21**（旧版 clang 做编译器，新版做工具），含网络维护工具（vim, zstd, net-tools, traceroute, mtr, dnsutils, tcpdump, iftop, nload, nethogs, nmap, iperf3, vnstat, wireshark, autossh, fzf）
+- **work-cuda.Dockerfile: 基于 `nvidia/cuda:13.0.2-devel-ubuntu24.04`，clang-18 + clang-format/clang-tidy/lldb/clangd 为 clang-21**（旧版 clang 做编译器，新版做工具），含网络维护工具（vim, zstd, net-tools, traceroute, mtr, dnsutils, tcpdump, iftop, nload, nethogs, nmap, iperf3, vnstat, wireshark, autossh, fzf）
 - **explore.Dockerfile 完全独立**: 使用不同的 tree-sitter version、Emacs 29 branch、更老的工具版本
 - **derp.Dockerfile 使用 `golang:alpine`**: 编译 tailscale 组件为二进制后用 alpine 运行
 - **work系列 builder0 构建 Emacs 后不清除 `/opt/emacs`**（work.Dockerfile），而 work-cuda 执行 `rm -r /opt/emacs` 节省空间
