@@ -1,0 +1,30 @@
+name: emacs-image
+
+on:
+  push:
+    paths:
+      - 'emacs.Dockerfile'
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Get short commit hash
+        id: commit
+        run: echo "short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      - name: Build the latest Docker image
+        run: |
+          docker build . --file emacs.Dockerfile --tag emacs
+          docker image tag emacs ${{ secrets.DOCKERHUB_USERNAME }}/emacs:latest
+          docker image tag emacs ${{ secrets.DOCKERHUB_USERNAME }}/emacs:24.04
+          docker image tag emacs ${{ secrets.DOCKERHUB_USERNAME }}/emacs:24.04-${{ steps.commit.outputs.short }}
+      - name: Push the latest Docker image
+        run: docker push --all-tags ${{ secrets.DOCKERHUB_USERNAME }}/emacs
