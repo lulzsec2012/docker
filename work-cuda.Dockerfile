@@ -444,6 +444,21 @@ RUN apt-get update && apt-get install -y  \
     rm -rf /var/lib/apt/lists/*
 
 # ================================================================================
+#  OpenCode CLI
+#  https://opencode.ai/docs/
+RUN curl -fsSL https://opencode.ai/install | bash
+
+# ================================================================================
+#  Rust / Cargo
+#  https://rustup.rs/
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path && \
+    rustup default stable && \
+    rustup component add rustfmt clippy
+
+# ================================================================================
 #  tailscale
 
 RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/${UBUNTU_NAME}.gpg | apt-key add - && \
@@ -464,7 +479,10 @@ RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/${UBUNTU_NAME}.gpg | apt
     -e 's/#SyslogFacility.*/SyslogFacility AUTH/' \
     -e 's/^#\?UsePAM.*/UsePAM no/' \
     -e 's/#LogLevel.*/LogLevel INFO/' && \
-    mkdir -p /var/run/sshd
+    mkdir -p /var/run/sshd && \
+    # allow sudo without password for sudo group
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/sudo-nopasswd && \
+    chmod 440 /etc/sudoers.d/sudo-nopasswd
 
 # timeZone and some pip packages
 RUN TZ=Asia/Shanghai \
